@@ -61,6 +61,7 @@ class MyApp extends StatelessWidget {
         softWrap: true,
       ),
     );
+
     return MaterialApp(
       title: 'Flutter layout demo ',
       home: Scaffold(
@@ -77,7 +78,14 @@ class MyApp extends StatelessWidget {
             ),
             titleSection,
             buttonSection,
-            textSection
+            textSection,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                const TapboxA(),
+                const TapboxA(),
+              ],
+            ),
           ],
         ),
       ),
@@ -102,6 +110,43 @@ class MyApp extends StatelessWidget {
           ),
         ),
       ],
+    );
+  }
+}
+
+class TapboxA extends StatefulWidget {
+  const TapboxA({super.key});
+
+  @override
+  State<TapboxA> createState() => _TapboxAState();
+}
+
+class _TapboxAState extends State<TapboxA> {
+  bool _active = true;
+
+  void _handleTap() {
+    setState(() {
+      _active = !_active;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: _handleTap,
+      child: Container(
+        width: 150.0,
+        height: 150.0,
+        decoration: BoxDecoration(
+          color: _active ? Colors.lightGreen[700] : Colors.grey[600],
+        ),
+        child: Center(
+          child: Text(
+            _active ? 'Active' : 'Inactive',
+            style: const TextStyle(fontSize: 32.0, color: Colors.white),
+          ),
+        ),
+      ),
     );
   }
 }

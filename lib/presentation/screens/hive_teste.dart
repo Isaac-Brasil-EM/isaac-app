@@ -18,16 +18,17 @@ class _MinhaPaginaState extends State<MinhaPagina> {
 
   static const _boxName = 'aluno_box';
 
-  Future<Box> _getBox() async {
-    if (Hive.isBoxOpen('minhaCaixa')) {
-      return Hive.box('minhaCaixa');
-    }
-    return await Hive.openBox<String>(_boxName);
-  }
+  // Future<Box> _getBox() async {
+  //   if (Hive.isBoxOpen('minhaCaixa')) {
+  //     return Hive.box('minhaCaixa');
+  //   }
+  //   return await Hive.openBox<String>(_boxName);
+  // }
 
   @override
   Widget build(BuildContext context) {
     var box = Hive.box('minhaCaixa');
+
     box.put('name', 'David');
     box.put('age', '18');
 

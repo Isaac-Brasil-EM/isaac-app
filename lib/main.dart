@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
                 ),
               );
             } else {
-              return MinhaPagina();
+              return const MinhaPagina();
             }
           } else {
             return const CircularProgressIndicator();
@@ -41,5 +41,6 @@ class MyApp extends StatelessWidget {
 Future<Box> _abrirCaixa() async {
   var dir = await getApplicationDocumentsDirectory();
   Hive.init(dir.path);
+  print("diretório -> ${dir.path}");
   return await Hive.openBox('minhaCaixa');
 }

@@ -16,8 +16,27 @@ class _MinhaPaginaState extends State<MinhaPagina> {
     super.initState();
   }
 
+  static const _boxName = 'aluno_box';
+
+  Future<Box> _getBox() async {
+    if (Hive.isBoxOpen('minhaCaixa')) {
+      return Hive.box('minhaCaixa');
+    }
+    return await Hive.openBox<String>(_boxName);
+  }
+
   @override
   Widget build(BuildContext context) {
+    var box = Hive.box('minhaCaixa');
+    box.put('name', 'David');
+    box.put('age', '18');
+    box.delete('contador');
+    var values = box.values;
+    var keys = box.keys;
+
+    var name = box.get('name');
+    var age = box.get('age');
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Exemplo hive'),
@@ -25,28 +44,13 @@ class _MinhaPaginaState extends State<MinhaPagina> {
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text('Reinicie o aplicativo para testar'),
-            const SizedBox(height: 8),
-            const Text('You have pushed the button this many times:'),
-            ValueListenableBuilder(
-              valueListenable: _caixa.listenable(),
-              builder: (context, box, widget) {
-                return Text(
-                  box.get('contador', defaultValue: 0).toString(),
-                  style: Theme.of(context).textTheme.headline6,
-                );
-              },
-            )
+          children: [
+            Text(
+              "Values: ${values}\nKeys: ${keys}\nName:${name}\nAge:${age}",
+              style: Theme.of(context).textTheme.headline6,
+            ),
           ],
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          _caixa.put('contador', _caixa.get('contador', defaultValue: 0) + 1);
-        },
-        tooltip: 'Aumentar',
-        child: const Icon(Icons.add),
       ),
     );
   }

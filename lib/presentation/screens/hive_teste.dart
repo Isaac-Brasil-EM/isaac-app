@@ -30,7 +30,7 @@ class _MinhaPaginaState extends State<MinhaPagina> {
     var box = Hive.box('minhaCaixa');
     box.put('name', 'David');
     box.put('age', '18');
-    box.delete('contador');
+
     var values = box.values;
     var keys = box.keys;
 
@@ -46,7 +46,7 @@ class _MinhaPaginaState extends State<MinhaPagina> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              "Values: ${values}\nKeys: ${keys}\nName:${name}\nAge:${age}",
+              "Values: ${values}\nKeys: ${keys}\n\nName:${name}\nAge:${age}",
               style: Theme.of(context).textTheme.headline6,
             ),
           ],

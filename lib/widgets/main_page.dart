@@ -68,7 +68,7 @@ class AppHome extends StatelessWidget {
           title: const Text('Home'),
           actions: <Widget>[
             IconButton(
-              icon: const Icon(Icons.settings),
+              icon: const Icon(Icons.menu),
               onPressed: () {
                 // Usando o contexto armazenado na variável
                 _onSettingsButtonPressed(context);

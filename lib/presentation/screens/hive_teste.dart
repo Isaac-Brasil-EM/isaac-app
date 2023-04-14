@@ -1,31 +1,53 @@
 import 'package:flutter/material.dart';
-import 'package:isaac_app/widgets/main_page.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
-class MinhaPagina extends StatelessWidget {
-  // ou StatefulWidget
+class MinhaPagina extends StatefulWidget {
   const MinhaPagina({super.key});
 
   @override
+  _MinhaPaginaState createState() => _MinhaPaginaState();
+}
+
+class _MinhaPaginaState extends State<MinhaPagina> {
+  late Box _caixa;
+  @override
+  void initState() {
+    _caixa = Hive.box('minhaCaixa');
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Hive'),
-          actions: <Widget>[
-            IconButton(
-              icon: const Icon(Icons.arrow_back),
-              onPressed: () {
-                // Usando o contexto armazenado na variável
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const AppHome()),
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Exemplo hive'),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            const Text('Reinicie o aplicativo para testar'),
+            const SizedBox(height: 8),
+            const Text('You have pushed the button this many times:'),
+            ValueListenableBuilder(
+              valueListenable: _caixa.listenable(),
+              builder: (context, box, widget) {
+                return Text(
+                  box.get('contador', defaultValue: 0).toString(),
+                  style: Theme.of(context).textTheme.headline6,
                 );
               },
-            ),
+            )
           ],
         ),
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          _caixa.put('contador', _caixa.get('contador', defaultValue: 0) + 1);
+        },
+        tooltip: 'Aumentar',
+        child: const Icon(Icons.add),
+      ),
     );
   }
-  // Defina o código da sua página aqui
 }

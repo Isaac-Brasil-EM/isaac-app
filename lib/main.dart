@@ -3,11 +3,12 @@ import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:path_provider/path_provider.dart';
 
+import 'presentation/screens/drag_teste.dart';
 import 'presentation/screens/hive_teste.dart';
 
 //import 'package:path_provider/path_provider.dart';
 
-void main() => runApp(const MaterialApp(home: MyApp()));
+void main() => runApp(MaterialApp(home: DragScreen()));
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});

@@ -20,7 +20,7 @@ class DragScreen extends StatefulWidget {
 }
 
 class _DragScreenState extends State<DragScreen> {
-  final data = [1, 2, 3, 4, 5];
+  final data = [1, 2, 3, 4, 5, 6];
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +49,7 @@ class _DragScreenState extends State<DragScreen> {
               data.insert(newIndex, element);
             });
           },
-          footer: [
+          footer: const [
             Card(
               child: Center(
                 child: Icon(Icons.add),
